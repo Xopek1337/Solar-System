@@ -1,9 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <cmath>
 #include <iostream>
-#include <iostream>
 #include <sstream>
-
 using namespace sf;
 
 class Planet
@@ -16,10 +14,7 @@ public:
 	double dx = 0;
 	Planet(Image& image, double radius, double orbit, double centerx, double centery,double a)
 	{
-		if (orbit == 0)
-		{
-			sprite.setOrigin(sf::Vector2f(2350 , 2350));
-		}
+		sprite.setOrigin(sf::Vector2f(image.getSize().x/2, image.getSize().y/2));
 		this->a = a;
 		this->centerx = centerx;
 		this->centery = centery;
