@@ -13,14 +13,14 @@ public:
 	Sprite sprite;
 	double x = 0;
 	double y = 0;
-	double a = 0.001;
 	double dx = 0;
-	Planet(Image& image, double radius, double orbit, double centerx, double centery)
+	Planet(Image& image, double radius, double orbit, double centerx, double centery,double a)
 	{
 		if (orbit == 0)
 		{
 			sprite.setOrigin(sf::Vector2f(2350 , 2350));
 		}
+		this->a = a;
 		this->centerx = centerx;
 		this->centery = centery;
 		this->radius = radius;
@@ -37,6 +37,7 @@ public:
 		dx += a;
 	}
 protected:
+	double a;
 	double radius;
 	double orbit;
 	double centerx;
@@ -56,9 +57,9 @@ int main()
 	eImage.loadFromFile("earth_PNG17.png");
 	vImage.loadFromFile("venus.png");
 	sImage.loadFromFile("sun.png");
-	Planet earth(eImage, 0.1, 225, center.x,center.y);
-	Planet sun(sImage, 0.08, 0,center.x,center.y);
-	Planet venus(vImage, 0.02, 175, center.x, center.y);
+	Planet earth(eImage, 0.1, 225, center.x,center.y,0.0015);
+	Planet sun(sImage, 0.08, 0,center.x,center.y,0);
+	Planet venus(vImage, 0.02, 175, center.x, center.y,0.001);
 
 	while (window.isOpen())
 	{
