@@ -172,9 +172,6 @@ int main()
 	Planet venus(vImage, 0.02, 175, center.x, center.y, 0.0013);
 	Planet mercury(vImage, 0.015, 125, center.x, center.y, 0.0015);
 
-	std::string line;
-	std::ifstream in("cfg.txt");
-
 	SolarSystem SS;
 	SS.addplanet(earth);
 	SS.addplanet(sun);
