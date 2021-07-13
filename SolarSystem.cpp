@@ -13,9 +13,6 @@ class Planet
 public:
 	Texture texture;
 	Sprite sprite;
-	double x = 0;
-	double y = 0;
-	
 
 	Planet(Image& image, double radius, double orbit, double centerx, double centery, double a)
 	{
@@ -48,6 +45,8 @@ public:
 		dx = angle;
 	}
 protected:
+	double x = 0;
+	double y = 0;
 	double dx = 0;
 	double a;
 	double radius;
@@ -147,12 +146,10 @@ public:
 	}
 protected:
 	std::vector<Planet> v;
-
 };
 int main()
 {
 	RenderWindow window(VideoMode(1920, 1200), "Solar System");
-	
 	//RenderWindow window(sf::VideoMode(), "app.exe", sf::Style::Fullscreen);
 	sf::View view = window.getDefaultView();
 	sf::Vector2f center = view.getCenter();
