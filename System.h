@@ -74,8 +74,8 @@ public:
 					{
 						if (abs(v[i - 1].getx() - localPosition.x) < 75 && abs(v[i - 1].gety() - localPosition.y) < 75)
 						{
-							double cex = v[i - 1].getx() - localPosition.x;
-							double cey = v[i - 1].gety() - localPosition.y;
+							double cex = localPosition.x - v[i - 1].getx();
+							double cey = localPosition.y - v[i - 1].gety();
 							double rads = sqrt(cey * cey + cex * cex);
 							sputnik gg(mImage, 0.005, rads, center.x, center.y, 0.0030);
 							gg.setAngle(atan2(cey, cex));
@@ -94,6 +94,30 @@ public:
 							if (i == 8)
 								uran.push_back(gg);
 							if (i == 9)
+								nept.push_back(gg);
+						}
+						else if (abs(v[i].getx() - localPosition.x) < 75 && abs(v[i].gety() - localPosition.y) < 75)
+						{
+							double cex = localPosition.x - v[i].getx();
+							double cey = localPosition.y - v[i].gety();
+							double rads = sqrt(cey * cey + cex * cex);
+							sputnik gg(mImage, 0.005, rads, center.x, center.y, 0.0030);
+							gg.setAngle(atan2(cey, cex));
+							if (i == 1)
+								mer.push_back(gg);
+							if (i == 2)
+								vs.push_back(gg);
+							if (i == 3)
+								es.push_back(gg);
+							if (i == 4)
+								mar.push_back(gg);
+							if (i == 5)
+								ju.push_back(gg);
+							if (i == 6)
+								sat.push_back(gg);
+							if (i == 7)
+								uran.push_back(gg);
+							if (i == 8)
 								nept.push_back(gg);
 						}
 						else
