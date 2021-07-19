@@ -9,6 +9,7 @@
 #include <vector>
 #include <fstream>
 #include <string>
+#include "Planet.h"
 
 using namespace sf;
 
@@ -51,28 +52,150 @@ public:
 				}
 			}
 
+
+
 			if (Keyboard::isKeyPressed(Keyboard::A)) { view.move(-0.2, 0); }
 			if (Keyboard::isKeyPressed(Keyboard::D)) { view.move(0.2, 0); }
 			if (Keyboard::isKeyPressed(Keyboard::S)) { view.move(0, 0.2); }
 			if (Keyboard::isKeyPressed(Keyboard::W)) { view.move(0, -0.2); }
+
+			if (Keyboard::isKeyPressed(Keyboard::X)) 
+			{ 
+				sf::Vector2i localPosition = Mouse::getPosition();
+				double cx =  localPosition.x - center.x;
+				double cy =  localPosition.y - center.y;
+				
+				double rad = sqrt(cx*cx+cy*cy);
+				Image mImage;
+				mImage.loadFromFile("venus.png");
+				for (int i = 1; i < v.size(); i++)
+				{
+					if (v[i].geto()-v[i].getr() > rad && v[i-1].geto()+v[i-1].getr() < rad)
+					{
+						if (abs(v[i - 1].getx() - localPosition.x) < 75 && abs(v[i - 1].gety() - localPosition.y) < 75)
+						{
+							double cex = v[i - 1].getx() - localPosition.x;
+							double cey = v[i - 1].gety() - localPosition.y;
+							double rads = sqrt(cey * cey + cex * cex);
+							sputnik gg(mImage, 0.005, rads, center.x, center.y, 0.0030);
+							gg.setAngle(atan2(cey, cex));
+							if (i == 2)
+								mer.push_back(gg);
+							if (i == 3)
+								vs.push_back(gg);
+							if (i == 4)
+								es.push_back(gg);
+							if (i == 5)
+								mar.push_back(gg);
+							if (i == 6)
+								ju.push_back(gg);
+							if (i == 7)
+								sat.push_back(gg);
+							if (i == 8)
+								uran.push_back(gg);
+							if (i == 9)
+								nept.push_back(gg);
+						}
+						else
+						{
+							Planet gg(mImage, 0.005, rad, center.x, center.y, 0.0015);
+							gg.setAngle(atan2(cy, cx));
+							sv.push_back(gg);
+						}
+					}
+				}
+			}
 
 			window.setView(view);
 			for (int i = 0; i < v.size(); i++)
 			{
 				v[i].update();
 			}
+			for (int i = 0; i < sv.size(); i++)
+			{
+				sv[i].update();
+			}
 			for (int i = 0; i < s.size(); i++)
 			{
-				s[i].update(v[1].getx(), v[1].gety());
+				s[i].update(v[3].getx(), v[3].gety());
+			}
+
+			for (int i = 0; i < es.size(); i++)
+			{
+				es[i].update(v[3].getx(), v[3].gety());
+			}
+			for (int i = 0; i < vs.size(); i++)
+			{
+				vs[i].update(v[2].getx(), v[2].gety());
+			}
+			for (int i = 0; i < mar.size(); i++)
+			{
+				mar[i].update(v[4].getx(), v[4].gety());
+			}
+			for (int i = 0; i < mer.size(); i++)
+			{
+				mer[i].update(v[1].getx(), v[1].gety());
+			}
+			for (int i = 0; i < ju.size(); i++)
+			{
+				ju[i].update(v[5].getx(), v[5].gety());
+			}
+			for (int i = 0; i < sat.size(); i++)
+			{
+				sat[i].update(v[6].getx(), v[6].gety());
+			}
+			for (int i = 0; i < uran.size(); i++)
+			{
+				uran[i].update(v[7].getx(), v[7].gety());
+			}
+			for (int i = 0; i < nept.size(); i++)
+			{
+				nept[i].update(v[8].getx(), v[8].gety());
 			}
 			window.clear();
 			for (int i = 0; i < v.size(); i++)
 			{
 				window.draw(v[i].sprite);
 			}
+			for (int i = 0; i < sv.size(); i++)
+			{
+				window.draw(sv[i].sprite);
+			}
 			for (int i = 0; i < s.size(); i++)
 			{
 				window.draw(s[i].sprite);
+			}
+			for (int i = 0; i < es.size(); i++)
+			{
+				window.draw(es[i].sprite);
+			}
+			for (int i = 0; i < vs.size(); i++)
+			{
+				window.draw(vs[i].sprite);
+			}
+			for (int i = 0; i < mar.size(); i++)
+			{
+				window.draw(mar[i].sprite);
+			}
+			for (int i = 0; i < mer.size(); i++)
+			{
+				window.draw(mer[i].sprite);
+			}
+			for (int i = 0; i < ju.size(); i++)
+			{
+				window.draw(ju[i].sprite);
+			}
+			for (int i = 0; i < sat.size(); i++)
+			{
+				window.draw(sat[i].sprite);
+			}
+			for (int i = 0; i < uran.size(); i++)
+			{
+				window.draw(uran[i].sprite);
+			}
+			for (int i = 0; i < nept.size(); i++)
+			{
+				window.draw(nept[i].sprite);
 			}
 			window.display();
 		}
@@ -125,5 +248,14 @@ public:
 	}
 protected:
 	std::vector<Planet> v;
+	std::vector<Planet> sv;
 	std::vector<sputnik> s;
+	std::vector<sputnik> es;
+	std::vector<sputnik> vs;
+	std::vector<sputnik> mer;
+	std::vector<sputnik> mar;
+	std::vector<sputnik> ju;
+	std::vector<sputnik> sat;
+	std::vector<sputnik> uran;
+	std::vector<sputnik> nept;
 };

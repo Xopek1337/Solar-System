@@ -61,6 +61,14 @@ public:
 	{
 		return y;
 	}
+	double getr()
+	{
+		return radius;
+	}
+	double geto()
+	{
+		return orbit;
+	}
 protected:
 	double x = 0;
 	double y = 0;
